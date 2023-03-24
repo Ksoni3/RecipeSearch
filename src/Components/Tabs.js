@@ -6,7 +6,7 @@ import {fetchTabData} from '../service'
 
 function Tabs() {
     const [active,setActive] = useState('Pizza')
-    const [tabData,setTabData] = useState('')
+    const [tabData,setTabData] = useState({})
     const [tabLabel, setTabLabel] = useState([
         {
             name:'Pizza',
@@ -68,7 +68,7 @@ function Tabs() {
         </div>
         <div className='recipe_banner'>
         {
-            tabData !== '' &&  <div className="left-col">
+            tabData &&  <div className="left-col">
                     <span className='badge'>{tabData.recipe.cuisineType[0].toUpperCase()}</span>
                     <h1>{tabData.recipe.label}</h1>
                     <p><strong>Recipe by:</strong><small>{tabData.recipe.source}</small></p>
