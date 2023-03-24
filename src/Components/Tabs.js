@@ -6,7 +6,7 @@ import {fetchTabData} from '../service'
 
 function Tabs() {
     const [active,setActive] = useState('Pizza')
-    const [tabData,setTabData] = useState({})
+    const [tabData,setTabData] = useState('')
     const [tabLabel, setTabLabel] = useState([
         {
             name:'Pizza',
@@ -32,8 +32,8 @@ function Tabs() {
 
     useEffect(()=>{
         fetchTabData(tabLabel[0].id).then((response)=>{
-            setTabData(response)
-            console.log(response)
+            setTabData(response.recipe)
+           
         })
 
     },[])
@@ -42,7 +42,7 @@ function Tabs() {
     const handleClick =(name,id)=>{
         setActive(name)
         fetchTabData(id).then((response)=>{
-            setTabData(response)
+            setTabData(response.recipe)
             console.log(response)
         })
 
@@ -68,16 +68,16 @@ function Tabs() {
         </div>
         <div className='recipe_banner'>
         {
-            tabData &&  <div className="left-col">
-                    <span className='badge'>{tabData.recipe.cuisineType[0].toUpperCase()}</span>
-                    <h1>{tabData.recipe.label}</h1>
-                    <p><strong>Recipe by:</strong><small>{tabData.recipe.source}</small></p>
+            tabData && <div className="left-col">
+                    <span className='badge'>{tabData.cuisineType[0].toUpperCase()}</span>
+                    <h1>{tabData?.label}</h1>
+                    <p><strong>Recipe by:</strong><small>{tabData.source}</small></p>
                     <h3>Ingredients</h3>
                     <div className='ingredients'>
                         <ul>
 
                         {
-                            tabData.recipe.ingredientLines.map((list,index )=>{
+                            tabData?.ingredientLines.map((list,index )=>{
                                 return (
                                     <li key={index}><GiCheckMark size="18px" color="#6fcb9f" />&nbsp;<span>{list}</span></li>
 
@@ -91,7 +91,7 @@ function Tabs() {
                
                 <div className="right-col">
                     <div className="image-wrapper">
-                    <img src={tabData.recipe.image} alt={tabData.recipe.label}/>
+                    <img src={tabData?.image} alt={tabData?.label}/>
                     </div>
                 </div>
         </div>
