@@ -7,18 +7,11 @@ import RecipeLists from './Components/ReceipeLists';
 
 
 function App() {
-
-
-
-
-
   return (
     <div className='app'>
     <Header/>
     <Tabs/>
     <RecipeLists />
-    
-
     </div>
   );
 }
