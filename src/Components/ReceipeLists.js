@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-
 import { BsSearch } from 'react-icons/bs'
 import { fetchData } from '../service'
 import Loader from './Loader'
@@ -12,23 +11,15 @@ function RecipeLists() {
   const [searchedTerm, setSearchTerm] = useState(query)
   const [data, setData] = useState([])
   const [loader, setLoader] = useState(true)
-  const [notFound, setNotFound] = useState(false)
 
   useEffect(() => {
     fetchData(searchedTerm).then((res) => {
+      setLoader(true)
       setData(res.hits)
       setLoader(false)
     })
   }, [searchedTerm])
 
-
-  useEffect(() => {
-    if (data && data.length === 0) {
-      setNotFound(true)
-    } else {
-      setNotFound(false)
-    }
-  }, [data])
 
 
   const handleChange = (e) => {
@@ -38,14 +29,7 @@ function RecipeLists() {
 
 
   const changeSearchedTerm = () => {
-    if(query.length === 0){
-        toast.error("please search")
-        return
-    }
-    setNotFound(false)
     setSearchTerm(query)
-    setLoader(true)
-   
    
   }
 
@@ -71,10 +55,9 @@ function RecipeLists() {
           </button>
         </div>
       </div>
-      <div className={ notFound ? 'nofound' : 'hideNofound'}>
-      
-        <h1 className="noFoundHeading">Search couldn't be found !!!</h1>
-      </div>
+     {data?.length === 0 && <div className= "notFound">   
+        <h1>Search couldn't be found !!!</h1>
+      </div>}
       {loader ? (
         <Loader />
       ) : (
