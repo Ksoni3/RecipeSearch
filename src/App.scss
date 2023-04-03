@@ -61,9 +61,13 @@ p{
         cursor: pointer;
         border-radius: 100%;
        
+           
+        }
+       
         .brand{
             font-size: 40px;
             color: #fff;
+            animation: rotate 1s both infinite;
 
         }
     }
@@ -99,7 +103,6 @@ p{
 
         }
     }
-}
 }
 
 
@@ -476,6 +479,10 @@ p{
 
     }
 }
+@keyframes rotate {
+    from { transform: rotate(0deg);   }
+    to   { transform: rotate(360deg); }
+}
 
 @keyframes spin{
     0%{
@@ -485,3 +492,4 @@ p{
         transform: rotate(360deg);
     }
 }
+
