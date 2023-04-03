@@ -2,11 +2,10 @@ import React, { useEffect, useState } from 'react'
 import { BsSearch } from 'react-icons/bs'
 import { fetchData } from '../service'
 import Loader from './Loader'
-import { ToastContainer, toast } from 'react-toastify'
+import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
 function RecipeLists() {
-  
   const [query, setQuery] = useState('pizza')
   const [searchedTerm, setSearchTerm] = useState(query)
   const [data, setData] = useState([])
@@ -20,17 +19,13 @@ function RecipeLists() {
     })
   }, [searchedTerm])
 
-
-
   const handleChange = (e) => {
     const { value } = e.target
     setQuery(value)
   }
 
-
   const changeSearchedTerm = () => {
     setSearchTerm(query)
-   
   }
 
   return (
@@ -55,9 +50,11 @@ function RecipeLists() {
           </button>
         </div>
       </div>
-     {data?.length === 0 && <div className= "notFound">   
-        <h1>Search couldn't be found !!!</h1>
-      </div>}
+      {data?.length === 0 && (
+        <div className="notFound">
+          <h1>Search couldn't be found !!!</h1>
+        </div>
+      )}
       {loader ? (
         <Loader />
       ) : (
